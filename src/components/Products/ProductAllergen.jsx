@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { updateProduct } from "../../features/product/productSlice";
 import Modal from "../shared/modal/Modal";
 import { toast } from "react-toastify";
+import { AiOutlineClose } from 'react-icons/ai';
 
 function ProductAllergens({ product }) {
   const [isNewAllergenModalOpen, setIsNewAllergenModalOpen] = useState(false);
@@ -49,6 +50,26 @@ function ProductAllergens({ product }) {
       });
   };
 
+  const handleAllergenDelete = (indexToDelete) => {
+    const updatedAllergens = product.allergens.filter((allergen, index) => index !== indexToDelete);
+  
+    dispatch(
+      updateProduct({
+        productId: product.id,
+        updatedData: { allergens: updatedAllergens },
+      })
+    )
+      .then(() => {
+        toast.success("L'allergène a été supprimé avec succès.");
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      })
+      .catch((error) => {
+        toast.error(`Une erreur est survenue, merci de réessayer.`);
+      });
+  };
+
   return (
     <>
       <section className="allergens-section">
@@ -58,13 +79,19 @@ function ProductAllergens({ product }) {
             Ajouter des allergènes pour ce produit
           </button>
         </div>
-        <h2 className="nb-allergen">Nombre d'allergènes :  <span> {product.allergens.length}</span>  </h2>
-       <div className="allergen-container">
+        <h2 className="nb-ingredient">Nombre d'allergènes :  <span> {product.allergens.length}</span>  </h2>
+       <div className="ingredient-container">
 
         {product.allergens.map((allergen, index) => (
-            <div className="allergen" key={index}>{allergen}</div>
-            ))}
+            <div className="additive-card ingredient" key={index}>
+              {allergen}
+              <AiOutlineClose
+                className="delete-icon"
+                onClick={() => handleAllergenDelete(index)}
+              />
             </div>
+        ))}
+        </div>
       </section>
       <hr />
       <Modal
@@ -75,7 +102,7 @@ function ProductAllergens({ product }) {
         <form onSubmit={handleNewAllergenSubmit}>
           <div className="form-group">
             <label htmlFor="allergen">Allergènes (séparés par des virgules)</label>
-            <input
+            <textarea
               id="allergen"
               name="allergen"
               onChange={handleNewAllergenChange}

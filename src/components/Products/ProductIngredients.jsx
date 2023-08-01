@@ -4,6 +4,7 @@ import { updateProduct } from "../../features/product/productSlice";
 import Modal from "../shared/modal/Modal";
 import Spinner from "../shared/spinner/Spinner";
 import { toast } from "react-toastify";
+import { AiOutlineClose } from 'react-icons/ai';
 
 function ProductIngredients({ product }) {
   const [isNewIngredientModalOpen, setIsNewIngredientModalOpen] = useState(false);
@@ -50,6 +51,26 @@ function ProductIngredients({ product }) {
       });
   };
 
+  const handleIngredientDelete = (indexToDelete) => {
+    const updatedIngredients = product.ingredients.filter((ingredient, index) => index !== indexToDelete);
+  
+    dispatch(
+      updateProduct({
+        productId: product.id,
+        updatedData: { ingredients: updatedIngredients },
+      })
+    )
+      .then(() => {
+        toast.success("L'ingrédient a été supprimé avec succès.");
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      })
+      .catch((error) => {
+        toast.error(`Une erreur est survenue, merci de réessayer.`);
+      });
+  };
+
   return (
     <>
       <section className="ingredients-section">
@@ -63,9 +84,15 @@ function ProductIngredients({ product }) {
        <div className="ingredient-container">
 
         {product.ingredients.map((ingredient, index) => (
-            <div className="ingredient" key={index}>{ingredient}</div>
-            ))}
+            <div className="additive-card ingredient" key={index}>
+              {ingredient}
+              <AiOutlineClose
+                className="delete-icon"
+                onClick={() => handleIngredientDelete(index)}
+              />
             </div>
+        ))}
+        </div>
       </section>
       <hr />
       <Modal
@@ -76,7 +103,7 @@ function ProductIngredients({ product }) {
         <form onSubmit={handleNewIngredientSubmit}>
           <div className="form-group">
             <label htmlFor="ingredient">Ingrédients (séparés par des virgules)</label>
-            <input
+            <textarea
               id="ingredient"
               name="ingredient"
               onChange={handleNewIngredientChange}

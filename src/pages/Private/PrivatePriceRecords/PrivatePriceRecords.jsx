@@ -108,7 +108,7 @@ function PrivatePriceRecords() {
         <Ticket key={record._id}>
           <div>{enseigneMap[record.enseigne]}</div>
           <div>{productMap[record.product]}</div>
-          <div>{record.price}</div>
+          <div>{record.price} XPF</div>
           <div>{new Date(record.dateRecorded).toLocaleDateString()}</div>
           <button onClick={() => handleDelete(record._id)} style={{ background: 'none', border: 'none' }}>
             <AiOutlineDelete size={20} />

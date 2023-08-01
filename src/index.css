@@ -147,6 +147,10 @@ h3 {
   font-family: inherit;
 }
 
+textarea {
+  height: 20rem;
+}
+
 .form-group label {
   text-align: left;
   display: block;
@@ -422,4 +426,8 @@ footer {
   border-radius: 20px;
   color: white !important;
   letter-spacing: 1px;
+}
+
+.strong {
+  font-weight: bolder;
 }/*# sourceMappingURL=index.css.map */

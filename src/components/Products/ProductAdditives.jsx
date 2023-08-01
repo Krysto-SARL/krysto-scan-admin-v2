@@ -130,7 +130,7 @@ function ProductAdditives({ product }) {
                             case "4-À éviter":
                               return "red";
                             default:
-                              return "black";
+                              return "grey";
                           }
                         })(),
                       }}
@@ -147,7 +147,7 @@ function ProductAdditives({ product }) {
       </section>
       <hr />
       <Modal
-        titleModal="Ajouter un additif"
+        titleModal="Ajouter des additifs"
         isOpen={isNewAdditiveModalOpen}
         onClose={closeNewAdditiveModal}
       >
@@ -163,7 +163,7 @@ function ProductAdditives({ product }) {
             >
               {additives.data.map((additive) => (
                 <option key={additive.id} value={additive.id}>
-                  {additive.code}
+                {additive.code} --- {additive.name}
                 </option>
               ))}
             </select>

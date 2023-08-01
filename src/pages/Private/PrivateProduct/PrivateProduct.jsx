@@ -14,6 +14,11 @@ import './product.css'
 import ProductAdditives from "../../../components/Products/ProductAdditives";
 import ProductIngredients from "../../../components/Products/ProductIngredients";
 import ProductAllergens from "../../../components/Products/ProductAllergen";
+import AddPriceRecord from "../../../components/Products/AddPriceRecord";
+import ProductPriceRecords from "../../../components/Products/ProductPriceRecords";
+
+
+
 function PrivateProductDetail() {
   const { product, isLoading, isError, message } = useSelector(
     (state) => state.product
@@ -80,6 +85,7 @@ function PrivateProductDetail() {
     <BackButton url={"/private/produits"} />
   
       <h1 className="product-title">{product.data.designation}</h1>
+      <AddPriceRecord product={product.data}/>
     <ProductBanner product={product.data}/>
       <section className="ticket-header">
       <button onClick={openNewPhotoModal} className="btn btn-sm">
@@ -110,6 +116,7 @@ function PrivateProductDetail() {
 <ProductIngredients product={product.data}/>
 <ProductAllergens product={product.data}/>
      <ProductAdditives product={product.data}/>
+     <ProductPriceRecords product={product.data}/>
      
     </section>
 

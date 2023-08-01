@@ -60,6 +60,7 @@ h3 {
   height: auto;
   width: 40rem;
   overflow-y: auto;
+  z-index: 999;
 }
 
 .btn-close {

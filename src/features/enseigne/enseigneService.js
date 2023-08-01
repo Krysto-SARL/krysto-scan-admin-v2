@@ -2,7 +2,7 @@ import axios from 'axios'
 const API_URL = process.env.REACT_APP_BASE_API_URL + '/enseignes'
 
 const getEnseignes = async () => {
-  const response = await axios.get(`${API_URL}`)
+  const response = await axios.get(`${API_URL}?limit=200`)
   return response.data
 }
 const getEnseigne = async (enseigneId) => {
