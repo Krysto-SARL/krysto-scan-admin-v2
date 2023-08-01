@@ -105,6 +105,7 @@ function PrivateProducts() {
       <section className="headings">
         <BackButton url={'/private/home'} />
         <h1>Gestion des produits</h1>
+        <h2>Nombres de produits : <span>{products.data.length}</span></h2>
         <div className="formInput">
 
         <input type="checkbox" checked={noPhotoFilter} onChange={(e) => setNoPhotoFilter(e.target.checked)} /> Afficher uniquement les produits sans photo

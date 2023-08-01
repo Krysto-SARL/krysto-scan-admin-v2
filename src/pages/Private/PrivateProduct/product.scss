@@ -16,10 +16,11 @@
     .img-container{
         flex: 2;
         height: 100%;
+
         
         img{
-            
             height: 100%;
+            width: 80%;
             object-fit: contain;
         }
     }

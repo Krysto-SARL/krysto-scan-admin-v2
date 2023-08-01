@@ -4,7 +4,7 @@ const API_URL = process.env.REACT_APP_BASE_API_URL
 const productURL = '/products'
 
 const getProducts = async () => {
-  const response = await axios.get(`${API_URL}${productURL}`)
+  const response = await axios.get(`${API_URL}${productURL}?limit=1000`)
   return response.data
 }
 

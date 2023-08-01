@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import Spinner from '../../../components/shared/spinner/Spinner'
 import { getEnseigne, addEnseignePhoto } from '../../../features/enseigne/enseigneSlice'
 import Modal from '../../../components/shared/modal/Modal'
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 
 function PrivateEnseigne() {
   const { enseigne, isLoading, isError, message } = useSelector(
@@ -105,6 +106,38 @@ function PrivateEnseigne() {
           Ajouter une photo
         </button>
       </div>
+
+      
+<section>
+        <h3 className="title">Geolocalisation</h3>
+
+        <div className="leaflet-container">
+          <MapContainer
+            style={{ height: '100%', width: '100%' }}
+            center={[
+              enseigne.data.location.coordinates[1],
+              enseigne.data.location.coordinates[0],
+            ]}
+            zoom={14}
+            scrollWheelZoom={false}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker
+              position={[
+                enseigne.data.location.coordinates[1],
+                enseigne.data.location.coordinates[0],
+              ]}
+            >
+              <Popup>
+                {enseigne.data.location.formattedAddress} <br />
+              </Popup>
+            </Marker>
+          </MapContainer>
+        </div>
+      </section>
     </section>
   )
 }
