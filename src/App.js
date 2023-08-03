@@ -32,6 +32,8 @@ import PrivateProductCategory from './pages/Private/PrivateProductCategory/Priva
 import PrivateGarbagesTypes from './pages/Private/PrivateGarbageTypes/PrivateGarbageTypes.jsx'
 import PrivateVoluntaryDropPoint from './pages/Private/PrivateVoluntaryDropPoint/PrivateVoluntaryDropPoint.jsx'
 import PrivateAdditive from './pages/Private/PrivateAdditive/PrivateAdditive.jsx'
+import PrivateMarques from './pages/Private/PrivateMarques/PrivateMarques.jsx'
+import PrivateMarque from './pages/Private/PrivateMarque/PrivateMarque.jsx'
 
 function App() {
   return (
@@ -55,6 +57,8 @@ function App() {
                 path="/private/produit-categories"
                 element={<PrivateProductCategories />}
               />
+              <Route path="/private/marques" element={<PrivateMarques />} />
+              <Route path="/private/marque/:id" element={<PrivateMarque />} />
               <Route
                 path="/private/produit-categorie/:id"
                 element={<PrivateProductCategory />}
@@ -63,7 +67,10 @@ function App() {
               <Route path="/private/product/:id" element={<PrivateProduct />} />
 
               <Route path="/private/additifs" element={<PrivateAdditives />} />
-              <Route path="/private/additif/:id" element={<PrivateAdditive />} />
+              <Route
+                path="/private/additif/:id"
+                element={<PrivateAdditive />}
+              />
               <Route
                 path="/private/prix-enregistree"
                 element={<PrivatePriceRecords />}

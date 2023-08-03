@@ -14,6 +14,7 @@ import garbageTypeReducer from '../features/garbageType/garbageTypeSlice'
 import plasticTypeReducer from '../features/plasticType/plasticTypeSlice'
 import messageReducer from '../features/message/messageSlice'
 import additiveReducer from '../features/additive/additiveSlice'
+import marqueReducer from '../features/marque/marqueSlice'
 
 export const store = configureStore({
   reducer: {
@@ -32,5 +33,6 @@ export const store = configureStore({
     novaScore: novaScoreReducer,
     plasticType: plasticTypeReducer,
     message: messageReducer,
+    marque: marqueReducer,
   },
 })

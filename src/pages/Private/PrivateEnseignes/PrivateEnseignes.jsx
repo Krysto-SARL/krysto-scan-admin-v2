@@ -11,6 +11,7 @@ import Ticket from '../../../components/shared/ticket/Ticket'
 import Modal from '../../../components/shared/modal/Modal'
 import './privateEnseignes.css'
 import { Link } from 'react-router-dom'
+import { MapContainer } from 'react-leaflet'
 
 function PrivateEnseignes() {
   const { enseignes, isLoading, isError, message } = useSelector(
@@ -105,6 +106,11 @@ function PrivateEnseignes() {
     </Ticket>
   </Link>
 ))}
+
+
+
+
+
 
       <Modal
         titleModal="Ajouter une nouvelle enseigne"
