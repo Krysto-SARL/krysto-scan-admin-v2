@@ -22,6 +22,7 @@ import ProductGeneralInformation from '../../../components/Product/ProductGenera
 import ProductScores from '../../../components/Product/ProductScores/ProductScores'
 import ProductNutritionFacts from '../../../components/Product/ProductNutritionFacts/ProductNutritionFacts'
 import BigTitle from '../../../components/shared/BigTitle/BigTitle'
+import ProductEnvironement from '../../../components/Product/ProductEnvironement/ProductEnvironement'
 
 function PrivateProductDetail() {
   const { product, isLoading, isError, message } = useSelector(
@@ -112,6 +113,7 @@ function PrivateProductDetail() {
       {/* Section environement */}
       <BigTitle title={'Environement'} />
 
+<ProductEnvironement product={product.data}/>
 
 
 
