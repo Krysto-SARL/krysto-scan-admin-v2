@@ -6,6 +6,7 @@ import Modal from "../shared/modal/Modal";
 import Spinner from "../shared/spinner/Spinner";
 import { toast } from "react-toastify";
 import { AiOutlineClose } from 'react-icons/ai';
+import TitleSection from "../shared/TitleSection/TitleSection";
 
 function ProductAdditives({ product }) {
   const [isNewAdditiveModalOpen, setIsNewAdditiveModalOpen] = useState(false);
@@ -35,7 +36,7 @@ function ProductAdditives({ product }) {
   };
 
   const handleNewAdditiveChange = (e) => {
-    const { name, value } = e.target;
+    const { name } = e.target;
     setNewAdditiveData((prevData) => ({
       ...prevData,
       [name]: Array.from(e.target.selectedOptions, option => option.value),
@@ -101,8 +102,9 @@ function ProductAdditives({ product }) {
   return (
     <>
       <section className="additives-section">
+      <TitleSection title={"Additifs"}/>
         <div className="section-header">
-          <h1 className="product-title">ADDITIFS</h1>
+        
           <button className="btn btn-danger" onClick={openNewAdditiveModal}>
             Ajouter des additifs pour ce produit
           </button>
@@ -110,7 +112,7 @@ function ProductAdditives({ product }) {
         <div className="additives-card-container">
 
         {product.additives.length === 0 ? (
-            <p>Aucun additif enregistré pour ce produit.</p>
+            <p className="noData">Aucun additif enregistré pour ce produit.</p>
             ) : (
                 
                 product.additives.map((additive) => (

@@ -3,6 +3,7 @@ import productService from './productService'
 
 const initialState = {
   products: [],
+  averagePriceInfo: null,
   product: {},
   isError: false,
   isSuccess: false,
@@ -112,6 +113,40 @@ export const addProductPhoto = createAsyncThunk(
   },
 )
 
+export const findProductByCodeBarre = createAsyncThunk(
+  'product/findProductByCodeBarre',
+  async (codeBarre, thunkAPI) => {
+    try {
+      return await productService.findProductByCodeBarre(codeBarre)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  },
+)
+
+export const getAveragePrice = createAsyncThunk(
+  'product/getAveragePrice',
+  async ({ productId, year, month }, thunkAPI) => {
+    try {
+      return await productService.getAveragePrice(productId, year, month)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  },
+)
+
 export const productSlice = createSlice({
   name: 'product',
   initialState,
@@ -197,6 +232,34 @@ export const productSlice = createSlice({
         state.product = action.payload
       })
       .addCase(addProductPhoto.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.product = {}
+      })
+      .addCase(getAveragePrice.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getAveragePrice.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.averagePriceInfo = action.payload
+      })
+      .addCase(getAveragePrice.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.averagePriceInfo = null
+      })
+      .addCase(findProductByCodeBarre.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(findProductByCodeBarre.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.product = action.payload
+      })
+      .addCase(findProductByCodeBarre.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

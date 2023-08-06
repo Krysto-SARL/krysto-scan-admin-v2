@@ -13,6 +13,9 @@ function PrivateHome() {
         <Link className="btn" to={'/private/enseignes'}>
           Gestion des enseignes
         </Link>
+        <Link className="btn" to={'/private/produit-familles'}>
+          Gestion des familles de produit
+        </Link>
         <Link className="btn" to={'/private/produit-categories'}>
           Gestion des catégories de produit
         </Link>

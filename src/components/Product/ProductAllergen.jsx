@@ -4,6 +4,7 @@ import { updateProduct } from "../../features/product/productSlice";
 import Modal from "../shared/modal/Modal";
 import { toast } from "react-toastify";
 import { AiOutlineClose } from 'react-icons/ai';
+import TitleSection from "../shared/TitleSection/TitleSection";
 
 function ProductAllergens({ product }) {
   const [isNewAllergenModalOpen, setIsNewAllergenModalOpen] = useState(false);
@@ -73,8 +74,9 @@ function ProductAllergens({ product }) {
   return (
     <>
       <section className="allergens-section">
+      <TitleSection title={"Allergénes"}/>
         <div className="section-header">
-          <h1 className="product-title">ALLERGENS</h1>
+      
           <button className="btn btn-danger" onClick={openNewAllergenModal}>
             Ajouter des allergènes pour ce produit
           </button>

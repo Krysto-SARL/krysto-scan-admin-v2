@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   createPriceRecordForProduct,
   getPriceRecords,
-} from '../../features/priceRecord/priceRecordSlice'
-import Modal from '../shared/modal/Modal'
+} from '../../../features/priceRecord/priceRecordSlice'
+import Modal from '../../shared/modal/Modal'
 import { toast } from 'react-toastify'
-import { getEnseignes } from '../../features/enseigne/enseigneSlice'
-import Spinner from '../shared/spinner/Spinner'
+import { getEnseignes } from '../../../features/enseigne/enseigneSlice'
+import Spinner from '../../shared/spinner/Spinner'
 
 function AddPriceRecord({ product }) {
   const { enseignes, isLoading, isError, message } = useSelector(

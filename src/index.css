@@ -61,7 +61,7 @@ h3 {
   align-items: center;
   padding: 20px 0;
   border-bottom: 1px solid #9097e1;
-  margin-bottom: 60px;
+  margin-bottom: 1rem;
 }
 
 .header ul {
@@ -200,8 +200,8 @@ textarea {
 }
 
 .btn-back {
-  width: 150px;
-  margin-bottom: 20px;
+  width: 100px;
+  margin-bottom: 10px;
 }
 
 .btn:hover {
@@ -230,6 +230,12 @@ textarea {
 
 .ticket-info {
   font-size: 1.3rem;
+}
+
+.ticket-image img {
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .container-flex-center {
@@ -430,4 +436,11 @@ footer {
 
 .strong {
   font-weight: bolder;
+}
+
+.noData {
+  font-size: 1.5rem;
+  color: RED;
+  text-align: center;
+  margin-bottom: 2rem;
 }/*# sourceMappingURL=index.css.map */

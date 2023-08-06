@@ -211,8 +211,11 @@ function PrivateAdditives() {
                   Conservateur, agent de blanchiment (freine le brunissement)
                 </option>
                 <option value="Antioxydant">Antioxydant</option>
-                <option value="Antioxydant, agent de texture">
-                  Antioxydant, agent de texture
+                <option value="Antioxydant">
+                  Antioxydant
+                </option>
+                <option value="Agent de texture">
+                Agent de texture
                 </option>
                 <option value="Régulateur d'acidité">
                   Régulateur d'acidité

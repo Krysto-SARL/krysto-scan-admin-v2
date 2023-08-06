@@ -25,8 +25,10 @@ function Modal({ titleModal, btnTxt, isOpen, onClose, children }) {
       {isOpen && (
         <div className="overlay" onClick={handleOverlayClick}>
           <div className="modal">
-            <h2 className="modal-content">{titleModal}</h2>
-            {children}
+            <h2 className="modal-title">{titleModal}</h2>
+            <div className="modal-content-container">
+              {children}
+            </div>
             <button onClick={onClose} className="btn-close">
               X
             </button>

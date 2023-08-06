@@ -1,156 +1,141 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import {
   getProduct,
   addProductPhoto,
-} from "../../../features/product/productSlice";
-import { toast } from "react-toastify";
-import Spinner from "../../../components/shared/spinner/Spinner";
-import Modal from "../../../components/shared/modal/Modal";
-import { BackButton } from "../../../components/shared/BackButton";
-import ProductBanner from "../../../components/Products/ProductBanner";
+  getAveragePrice,
+} from '../../../features/product/productSlice'
+import { toast } from 'react-toastify'
+import Spinner from '../../../components/shared/spinner/Spinner'
+import Modal from '../../../components/shared/modal/Modal'
+import { BackButton } from '../../../components/shared/BackButton'
+import ProductBanner from '../../../components/Product/PrductBanner/ProductBanner'
 import './product.css'
-import ProductAdditives from "../../../components/Products/ProductAdditives";
-import ProductIngredients from "../../../components/Products/ProductIngredients";
-import ProductAllergens from "../../../components/Products/ProductAllergen";
-import AddPriceRecord from "../../../components/Products/AddPriceRecord";
-import ProductPriceRecords from "../../../components/Products/ProductPriceRecords";
 
-
+import AddPriceRecord from '../../../components/Product/ProductAddPriceRecords/AddPriceRecord'
+import ProductAveragePrice from '../../../components/Product/ProductAveragePrice/ProductAveragePrice'
+import ProductAdditives from '../../../components/Product/ProductAdditives'
+import ProductAllergens from '../../../components/Product/ProductAllergen'
+import ProductIngredients from '../../../components/Product/ProductIngredients'
+import ProductGeneralInformation from '../../../components/Product/ProductGeneralInformation/ProductGeneralInformation'
+import ProductScores from '../../../components/Product/ProductScores/ProductScores'
+import ProductNutritionFacts from '../../../components/Product/ProductNutritionFacts/ProductNutritionFacts'
 
 function PrivateProductDetail() {
   const { product, isLoading, isError, message } = useSelector(
-    (state) => state.product
-  );
-  const [isNewPhotoModalOpen, setIsNewPhotoModalOpen] = useState(false);
-  const [photoFile, setPhotoFile] = useState(null);
-  const [previewImage, setPreviewImage] = useState(null);
-  const params = useParams();
-  const dispatch = useDispatch();
+    (state) => state.product,
+  )
+  const [isNewPhotoModalOpen, setIsNewPhotoModalOpen] = useState(false)
+  const [photoFile, setPhotoFile] = useState(null)
+  const [previewImage, setPreviewImage] = useState(null)
+  const params = useParams()
+  const dispatch = useDispatch()
 
   const openNewPhotoModal = () => {
-    setIsNewPhotoModalOpen(true);
-  };
+    setIsNewPhotoModalOpen(true)
+  }
 
   const closeNewPhotoModal = () => {
-    setIsNewPhotoModalOpen(false);
-  };
+    setIsNewPhotoModalOpen(false)
+  }
 
   const handlePhotoChange = (e) => {
-    const file = e.target.files[0];
-    setPhotoFile(file);
-    setPreviewImage(URL.createObjectURL(file));
-  };
+    const file = e.target.files[0]
+    setPhotoFile(file)
+    setPreviewImage(URL.createObjectURL(file))
+  }
 
   const handlePhotoSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("photo", photoFile);
+    e.preventDefault()
+    const formData = new FormData()
+    formData.append('photo', photoFile)
     dispatch(
       addProductPhoto({
         productId: product.data.id,
         photo: formData,
-      })
+      }),
     )
       .then(() => {
-        setIsNewPhotoModalOpen(false);
-        window.location.reload();
+        setIsNewPhotoModalOpen(false)
+        window.location.reload()
       })
       .catch((error) => {
-        toast.error(`Une erreur s'est produite, merci de réessayer.`);
-      });
-  };
+        toast.error(`Une erreur s'est produite, merci de réessayer.`)
+      })
+  }
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      toast.error(message)
     }
-    dispatch(getProduct(params.id));
-  }, [dispatch, isError, message, params.id]);
+    dispatch(getProduct(params.id))
+    dispatch(getAveragePrice({ productId: params.id })) // Fetch average price info when the component is mounted
+  }, [dispatch, isError, message, params.id])
 
-  console.log(product.data);
+
+console.log(product.data);
 
   if (isLoading || !product.data) {
-    return <Spinner />;
+    return <Spinner />
   }
 
   if (isError) {
-    return <h3>Une erreur est survenue, merci de réessayer.</h3>;
+    return <h3>Une erreur est survenue, merci de réessayer.</h3>
   }
 
   return (
     <>
-    <section className="ticket-page">
-    <BackButton url={"/private/produits"} />
-  
-      <h1 className="product-title">{product.data.designation}</h1>
-      <AddPriceRecord product={product.data}/>
-    <ProductBanner product={product.data}/>
-      <section className="ticket-header">
-      <button onClick={openNewPhotoModal} className="btn btn-sm">
-        Ajouter une photo
-      </button>
-        <h2>
-          Famille :
-          <span>{product.data.productFamilly}</span>
-        </h2>
-        <h2>
-          Categorie :
-          <span>{product.data.productCategory.name}</span>
-        </h2>
-        <h2>
-         Code barre : 
-          <span>{product.data.codeBarre}</span>
-        </h2>
-        <h2>
-         Marque 
-          <span>{product.data.marque}</span>
-        </h2>
-        <h2>
-         Nom génerique : 
-          <span>{product.data.genericName}</span>
-        </h2>
+      <section className="ticket-page">
+        <BackButton url={'/private/produits'} />
+        <button onClick={openNewPhotoModal} className="btn btn-sm">
+            Ajouter une photo
+          </button>
+
+        <ProductBanner product={product.data} />
+        <ProductGeneralInformation product={product.data}/>
+        <ProductScores product={product.data}/>
+        <ProductIngredients product={product.data}/>
+        <ProductAdditives product={product.data}/>
+        <ProductAllergens product={product.data}/>
+        <ProductNutritionFacts product={product.data}/>
+        <section className="ticket-header">
+        <AddPriceRecord product={product.data} />
+         
+          <ProductAveragePrice product={product.data} />
+        </section>
+        <hr />
       </section>
-      <hr />
-<ProductIngredients product={product.data}/>
-<ProductAllergens product={product.data}/>
-     <ProductAdditives product={product.data}/>
-     <ProductPriceRecords product={product.data}/>
-     
-    </section>
 
-
-         <Modal
-          titleModal="Ajouter ou changer votre photo"
-           isOpen={isNewPhotoModalOpen}
-           onClose={closeNewPhotoModal}
-         >
-           <div>
-            <form className="add-photo-form" onSubmit={handlePhotoSubmit}>
-               <div className="form-group">
-                <input
-                  type="file"
-                  accept="image/*"
+      <Modal
+        titleModal="Ajouter ou changer votre photo"
+        isOpen={isNewPhotoModalOpen}
+        onClose={closeNewPhotoModal}
+      >
+        <div>
+          <form className="add-photo-form" onSubmit={handlePhotoSubmit}>
+            <div className="form-group">
+              <input
+                type="file"
+                accept="image/*"
                 onChange={handlePhotoChange}
-               />
-                {previewImage && (
-                 <img
-                    className="photo-preview"
-                    src={previewImage}
+              />
+              {previewImage && (
+                <img
+                  className="photo-preview"
+                  src={previewImage}
                   alt="Preview"
-                  />
-                 )}
-               </div>
-             <button className="btn" type="submit">
-                Ajouter
-               </button>
-            </form>
-           </div>
-       </Modal>
-        </>
-
-  );
+                />
+              )}
+            </div>
+            <button className="btn" type="submit">
+              Ajouter
+            </button>
+          </form>
+        </div>
+      </Modal>
+    </>
+  )
 }
 
-export default PrivateProductDetail;
+export default PrivateProductDetail

@@ -13,6 +13,12 @@ const createProductCategory = async (productCategoryData) => {
   const response = await axios.post(API_URL, productCategoryData)
   return response.data
 }
+
+const deleteProductCategory = async (productCategoryId) => {
+  const response = await axios.delete(`${API_URL}/${productCategoryId}`)
+  return response.data
+}
+
 const updateProductCategory = async (productCategoryId, updatedData) => {
   const response = await axios.put(
     `${API_URL}/${productCategoryId}`,
@@ -34,6 +40,7 @@ const productCategoryService = {
   createProductCategory,
   updateProductCategory,
   addProductCategoryPhoto,
+  deleteProductCategory,
 }
 
 export default productCategoryService

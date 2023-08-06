@@ -45,22 +45,6 @@ h3 {
   text-align: center;
 }
 
-.productBanner {
-  height: 15rem;
-  margin-top: 2rem;
-  display: flex;
-}
-.productBanner .img-container {
-  flex: 2;
-  height: 100%;
-}
-.productBanner .img-container img {
-  height: 100%;
-  width: 80%;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-
 .score-container {
   display: flex;
   flex: 2;

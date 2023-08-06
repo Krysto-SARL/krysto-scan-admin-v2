@@ -28,6 +28,25 @@ export const getProductCategories = createAsyncThunk(
   },
 )
 
+export const deleteProductCategory = createAsyncThunk(
+  'productCategory/delete',
+  async (productCategoryId, thunkAPI) => {
+    try {
+      return await productCategoryService.deleteProductCategory(
+        productCategoryId,
+      )
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  },
+)
+
 export const getProductCategory = createAsyncThunk(
   'productCategory/get',
   async (productCategoryId, thunkAPI) => {
@@ -179,6 +198,18 @@ export const productCategorySlice = createSlice({
         state.isError = true
         state.message = action.payload
         state.productCategory = {}
+      })
+      .addCase(deleteProductCategory.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteProductCategory.fulfilled, (state) => {
+        state.isLoading = false
+        state.isSuccess = true
+      })
+      .addCase(deleteProductCategory.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
       })
   },
 })

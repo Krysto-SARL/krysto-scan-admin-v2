@@ -9,23 +9,7 @@
 }
 
 
-.productBanner {
-    height: 15rem;
-    margin-top: 2rem;
-    display: flex;
-    .img-container{
-        flex: 2;
-        height: 100%;
 
-        
-        img{
-            height: 100%;
-            width: 80%;
-            object-fit: contain;
-        }
-    }
-
-}
 .score-container{
     display: flex;
     flex: 2;

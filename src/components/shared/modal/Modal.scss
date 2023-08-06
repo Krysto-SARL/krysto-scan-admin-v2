@@ -8,8 +8,12 @@
   left: 0;
   right: 0;
   background-color: rgba(21, 37, 37, 0.681);
+  z-index: 99999999;
 }
-
+.modal-content-container {
+  max-height: 60vh; /* Vous pouvez ajuster cette valeur en fonction de vos besoins */
+  overflow-y: auto;
+}
 .modal {
   position: fixed;
   top: 50%;
@@ -21,7 +25,7 @@
   height: auto;
   width: 40rem;
   overflow-y: auto;
-  z-index: 999;
+  z-index: 99999999;
 }
 
 

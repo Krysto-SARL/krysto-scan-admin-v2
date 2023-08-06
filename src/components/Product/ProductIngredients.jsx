@@ -5,6 +5,7 @@ import Modal from "../shared/modal/Modal";
 import Spinner from "../shared/spinner/Spinner";
 import { toast } from "react-toastify";
 import { AiOutlineClose } from 'react-icons/ai';
+import TitleSection from "../shared/TitleSection/TitleSection";
 
 function ProductIngredients({ product }) {
   const [isNewIngredientModalOpen, setIsNewIngredientModalOpen] = useState(false);
@@ -74,8 +75,8 @@ function ProductIngredients({ product }) {
   return (
     <>
       <section className="ingredients-section">
+        <TitleSection title={"Ingrédients"}/>
         <div className="section-header">
-          <h1 className="product-title">INGREDIENTS</h1>
           <button className="btn btn-danger" onClick={openNewIngredientModal}>
             Ajouter des ingrédients pour ce produit
           </button>

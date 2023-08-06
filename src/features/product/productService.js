@@ -40,6 +40,27 @@ const addProductPhoto = async (productId, photo) => {
   return response.data
 }
 
+const findProductByCodeBarre = async (codeBarre) => {
+  const response = await axios.get(
+    `${API_URL}${productURL}/codeBarre/${codeBarre}`,
+  )
+  return response.data
+}
+
+const getAveragePrice = async (productId, year, month) => {
+  let url = `${API_URL}${productURL}/${productId}/average-price`
+
+  const params = new URLSearchParams()
+
+  if (year) params.append('year', year)
+  if (month) params.append('month', month)
+
+  url = url + '?' + params.toString()
+
+  const response = await axios.get(url)
+  return response.data
+}
+
 const recyclableProductService = {
   getProducts,
   getProduct,
@@ -47,6 +68,8 @@ const recyclableProductService = {
   updateProduct,
   deleteProduct,
   addProductPhoto,
+  findProductByCodeBarre,
+  getAveragePrice,
 }
 
 export default recyclableProductService

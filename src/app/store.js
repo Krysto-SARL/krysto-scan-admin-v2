@@ -15,7 +15,7 @@ import plasticTypeReducer from '../features/plasticType/plasticTypeSlice'
 import messageReducer from '../features/message/messageSlice'
 import additiveReducer from '../features/additive/additiveSlice'
 import marqueReducer from '../features/marque/marqueSlice'
-
+import productFamilyReducer from '../features/productFamilly/productFamillySclice'
 export const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -34,5 +34,6 @@ export const store = configureStore({
     plasticType: plasticTypeReducer,
     message: messageReducer,
     marque: marqueReducer,
+    productFamily: productFamilyReducer,
   },
 })

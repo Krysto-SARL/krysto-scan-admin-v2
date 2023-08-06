@@ -1,0 +1,42 @@
+.form-group-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.form-group-container .form-group {
+  margin-right: 10px;
+}
+
+.price-info {
+  background-color: grey;
+  height: 2rem;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.price-info .card-info {
+  padding: 1rem;
+  border-radius: 2rem;
+  color: #fff;
+  font-weight: bolder;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+}
+
+.moyen {
+  background-color: orange;
+}
+
+.plus {
+  background-color: red;
+}
+
+.moins {
+  background-color: green;
+}/*# sourceMappingURL=procductAveragePrice.css.map */

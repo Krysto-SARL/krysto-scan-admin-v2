@@ -34,6 +34,7 @@ import PrivateVoluntaryDropPoint from './pages/Private/PrivateVoluntaryDropPoint
 import PrivateAdditive from './pages/Private/PrivateAdditive/PrivateAdditive.jsx'
 import PrivateMarques from './pages/Private/PrivateMarques/PrivateMarques.jsx'
 import PrivateMarque from './pages/Private/PrivateMarque/PrivateMarque.jsx'
+import PrivateProductFamilies from './pages/Private/PrivateProductFamillies/PrivateProductFamillies.jsx'
 
 function App() {
   return (
@@ -56,6 +57,10 @@ function App() {
               <Route
                 path="/private/produit-categories"
                 element={<PrivateProductCategories />}
+              />
+              <Route
+                path="/private/produit-familles"
+                element={<PrivateProductFamilies />}
               />
               <Route path="/private/marques" element={<PrivateMarques />} />
               <Route path="/private/marque/:id" element={<PrivateMarque />} />

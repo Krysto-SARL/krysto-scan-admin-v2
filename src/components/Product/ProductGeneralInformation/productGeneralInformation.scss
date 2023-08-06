@@ -1,0 +1,53 @@
+.general-info{
+    margin-bottom: 2rem;
+    h2{
+       
+        font-size: 1.3rem;
+     
+    }
+}
+
+.general-info-container{
+    display: flex;
+    padding: 1.2rem;
+    justify-content: space-evenly;
+    border-radius: 1rem;
+    background-color: #616161;
+    
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+   background-color: #fff;
+        color: black;
+        padding: 1rem;
+        border-radius: 1rem;
+      
+        h3{
+            color: blue;
+        }
+    }
+}
+
+
+.icon-no{
+    color: red;
+}
+.icon-yes{
+    color: darkgreen;
+}
+
+.genericName {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    h3 {
+        color: blue;
+    }
+    h4 {
+        font-size: 1rem;
+    }
+}

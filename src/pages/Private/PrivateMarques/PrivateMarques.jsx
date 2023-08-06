@@ -14,10 +14,9 @@ function PrivateMarques() {
   const [isNewMarqueModalOpen, setIsNewMarqueModalOpen] = useState(false)
   const [newMarqueData, setNewMarqueData] = useState({
     name: '',
-    subname: '',
-    country: '',
-    web: '',
+    groupe: '',
     details: '',
+    web: '',
   })
 
   const dispatch = useDispatch()
@@ -44,15 +43,15 @@ function PrivateMarques() {
       [name]: value,
     })
   }
-
+console.log(marques);
   const handleNewMarqueSubmit = (e) => {
     e.preventDefault()
     dispatch(createMarque(newMarqueData))
       .then(() => {
         toast.success('La nouvelle marque a été créée avec succès.')
-        setTimeout(() => {
-          window.location.reload()
-        }, 3000)
+        // setTimeout(() => {
+        //   window.location.reload()
+        // }, 3000)
       })
       .catch(() => {
         toast.error("Une erreur s'est produite lors de la création de la marque.")
@@ -106,7 +105,7 @@ function PrivateMarques() {
         <Link key={marque.id} to={`/private/marque/${marque.id}`}>
           <Ticket>
             <div>{marque.name}</div>
-            <div>{marque.subname}</div>
+            <div>{marque.groupe}</div>
             <div>{new Date(marque.createdAt).toLocaleDateString()}</div>
             <div>{new Date(marque.updatedAt).toLocaleDateString()}</div>
             <button
@@ -137,12 +136,12 @@ function PrivateMarques() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="subname">Sous-marque</label>
+            <label htmlFor="groupe">groupe</label>
             <input
               type="text"
-              name="subname"
+              name="groupe"
               onChange={handleNewMarqueChange}
-              value={newMarqueData.subname}
+              value={newMarqueData.groupe}
             />
           </div>
           <div className="form-group">
@@ -154,15 +153,7 @@ function PrivateMarques() {
               value={newMarqueData.web}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="details">Pays</label>
-            <input
-              type="text"
-              name="country"
-              onChange={handleNewMarqueChange}
-              value={newMarqueData.country}
-            />
-          </div>
+      
           <div className="form-group">
             <label htmlFor="details">Détails</label>
             <textarea

@@ -1,0 +1,49 @@
+.general-info {
+  margin-bottom: 2rem;
+}
+.general-info h2 {
+  font-size: 1.3rem;
+}
+
+.general-info-container {
+  display: flex;
+  padding: 1.2rem;
+  justify-content: space-evenly;
+  border-radius: 1rem;
+  background-color: #616161;
+}
+.general-info-container div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  color: black;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.general-info-container div h3 {
+  color: blue;
+}
+
+.icon-no {
+  color: red;
+}
+
+.icon-yes {
+  color: darkgreen;
+}
+
+.genericName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.genericName h3 {
+  color: blue;
+}
+.genericName h4 {
+  font-size: 1rem;
+}/*# sourceMappingURL=productGeneralInformation.css.map */

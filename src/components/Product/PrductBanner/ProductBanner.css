@@ -1,0 +1,26 @@
+.productBanner {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  height: auto;
+}
+
+.product-banner-txt-container {
+  flex: 3;
+}
+.product-banner-txt-container h1 {
+  text-align: left;
+}
+
+.product-img-container {
+  width: 200px;
+  height: 200px;
+  flex: 1;
+  margin-right: 2rem;
+}
+.product-img-container img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}/*# sourceMappingURL=ProductBanner.css.map */
