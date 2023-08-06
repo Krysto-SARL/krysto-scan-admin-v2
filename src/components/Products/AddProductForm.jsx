@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
-import { createProduct, getProducts } from '../../features/product/productSlice';
-import { getProductCategories } from '../../features/productCategory/productCategorySlice';
-import { getProductFamilies } from '../../features/productFamilly/productFamillySclice';
-import Spinner from '../shared/spinner/Spinner';
+import { createProduct, getProducts } from '../../features/product/productSlice'
+import { getProductCategories } from '../../features/productCategory/productCategorySlice'
+import { getProductFamilies } from '../../features/productFamilly/productFamillySclice'
+import Spinner from '../shared/spinner/Spinner'
 
 function AddProductForm({ closeModal }) {
   const [newProductData, setNewProductData] = useState({
@@ -13,62 +13,62 @@ function AddProductForm({ closeModal }) {
     productCategory: '',
     codeBarre: '',
     designation: '',
-  });
-  const [filteredCategories, setFilteredCategories] = useState([]);
-  const { productFamilies } = useSelector((state) => state.productFamily);
+  })
+  const [filteredCategories, setFilteredCategories] = useState([])
+  const { productFamilies } = useSelector((state) => state.productFamily)
   const { productCategories, isError, message } = useSelector(
     (state) => state.productCategory,
-  );
+  )
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      toast.error(message)
     }
 
-    dispatch(getProductCategories());
-    dispatch(getProductFamilies());
-  }, [dispatch, isError, message]);
+    dispatch(getProductCategories())
+    dispatch(getProductFamilies())
+  }, [dispatch, isError, message])
 
   const handleNewProductChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setNewProductData((prevData) => ({
       ...prevData,
       [name]: value,
-    }));
-console.log(productCategories.data);
-  // Si la famille de produits est sélectionnée, filtrez les catégories
-  if (name === 'productFamily') {
-    const selectedFamilyCategories = productCategories.data.filter(
-      (category) => category.ProductFamilly === value, // Utilisation de ProductFamilly avec une majuscule
-    );
-    console.log(selectedFamilyCategories); // Log pour vérifier les catégories filtrées
-    setFilteredCategories(selectedFamilyCategories);
+    }))
+    console.log(productCategories.data)
+    // Si la famille de produits est sélectionnée, filtrez les catégories
+    if (name === 'productFamily') {
+      const selectedFamilyCategories = productCategories.data.filter(
+        (category) => category.ProductFamilly === value, // Utilisation de ProductFamilly avec une majuscule
+      )
+      console.log(selectedFamilyCategories) // Log pour vérifier les catégories filtrées
+      setFilteredCategories(selectedFamilyCategories)
+    }
   }
-};
 
   const handleNewProductSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     dispatch(createProduct(newProductData))
       .then(() => {
-        toast.success('Le nouveau produit a été créé avec succès.');
-        dispatch(getProducts());
-        console.log(newProductData);
+        toast.success('Le nouveau produit a été créé avec succès.')
+        dispatch(getProducts())
+        console.log(newProductData)
       })
       .catch(() => {
-        toast.error("Une erreur s'est produite lors de la création du produit.");
-      });
-    closeModal();
-  };
+        toast.error("Une erreur s'est produite lors de la création du produit.")
+      })
+    closeModal()
+  }
 
   if (!productCategories.data || !productFamilies.data) {
-    return <Spinner/>;
+    return <Spinner />
   }
 
   if (isError) {
-    return <h3>Une erreur est survenue, merci de réessayer.</h3>;
+    return <h3>Une erreur est survenue, merci de réessayer.</h3>
   }
 
   return (
@@ -130,7 +130,7 @@ console.log(productCategories.data);
         </div>
       </form>
     </>
-  );
+  )
 }
 
-export default AddProductForm;
+export default AddProductForm
