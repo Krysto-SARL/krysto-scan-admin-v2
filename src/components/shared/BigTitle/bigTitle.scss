@@ -1,0 +1,16 @@
+@import '../../../SASS/reset';
+@import '../../../SASS/variables';
+
+.bigTitleContainer {
+  background-color: $secondary;
+  color: $dark;
+  border-radius: 1rem;
+
+  padding: 0.5rem 1rem;
+  margin: 2rem 0;
+
+  h2 {
+    text-transform: uppercase;
+    font-weight: bolder;
+  }
+}

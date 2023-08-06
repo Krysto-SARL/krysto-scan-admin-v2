@@ -5,6 +5,7 @@ import { updateProduct } from '../../../features/product/productSlice'; // Mette
 import './productGeneralInformation.css';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import TitleSection from '../../shared/TitleSection/TitleSection';
+import BigTitle from '../../shared/BigTitle/BigTitle';
 
 function ProductGeneralInformation({ product }) {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ function ProductGeneralInformation({ product }) {
   return (
     <>
       <section className="general-info">
-        <TitleSection title={"Informations générales"}/>
+     
       
        
         <h2>Provenance : <span>{product.provenanceCountry ? product.provenanceCountry : 'non défini'}</span></h2>

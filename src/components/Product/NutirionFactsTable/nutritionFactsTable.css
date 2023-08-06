@@ -1,0 +1,13 @@
+.nutrition-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  text-align: left;
+  border: 3px solid rgb(221, 221, 221);
+  margin: 1rem 0;
+}
+
+.nutrition-table th, .nutrition-table td {
+  padding: 8px 12px;
+  border: 1px solid #dcdcdc;
+}/*# sourceMappingURL=nutritionFactsTable.css.map */

@@ -21,6 +21,7 @@ import ProductIngredients from '../../../components/Product/ProductIngredients'
 import ProductGeneralInformation from '../../../components/Product/ProductGeneralInformation/ProductGeneralInformation'
 import ProductScores from '../../../components/Product/ProductScores/ProductScores'
 import ProductNutritionFacts from '../../../components/Product/ProductNutritionFacts/ProductNutritionFacts'
+import BigTitle from '../../../components/shared/BigTitle/BigTitle'
 
 function PrivateProductDetail() {
   const { product, isLoading, isError, message } = useSelector(
@@ -73,8 +74,7 @@ function PrivateProductDetail() {
     dispatch(getAveragePrice({ productId: params.id })) // Fetch average price info when the component is mounted
   }, [dispatch, isError, message, params.id])
 
-
-console.log(product.data);
+  console.log(product.data)
 
   if (isLoading || !product.data) {
     return <Spinner />
@@ -86,27 +86,36 @@ console.log(product.data);
 
   return (
     <>
-      <section className="ticket-page">
-        <BackButton url={'/private/produits'} />
-        <button onClick={openNewPhotoModal} className="btn btn-sm">
-            Ajouter une photo
-          </button>
+      <BackButton url={'/private/produits'} />
+      <button onClick={openNewPhotoModal} className="btn btn-sm">
+        Ajouter une photo
+      </button>
 
-        <ProductBanner product={product.data} />
-        <ProductGeneralInformation product={product.data}/>
-        <ProductScores product={product.data}/>
-        <ProductIngredients product={product.data}/>
-        <ProductAdditives product={product.data}/>
-        <ProductAllergens product={product.data}/>
-        <ProductNutritionFacts product={product.data}/>
-        <section className="ticket-header">
-        <AddPriceRecord product={product.data} />
-         
-          <ProductAveragePrice product={product.data} />
-        </section>
-        <hr />
-      </section>
+      {/* Section informations generale et header */}
+      <ProductBanner product={product.data} />
+      <BigTitle title={'Informations générales'} />
+      <ProductGeneralInformation product={product.data} />
+      <ProductScores product={product.data} />
 
+      {/* Section santé */}
+      <BigTitle title={'Santé'} />
+      <ProductIngredients product={product.data} />
+      <ProductAdditives product={product.data} />
+      <ProductAllergens product={product.data} />
+      <ProductNutritionFacts product={product.data} />
+      {/* Section Prix */}
+      <BigTitle title={'Prix'} />
+
+      <AddPriceRecord product={product.data} />
+
+      <ProductAveragePrice product={product.data} />
+      {/* Section environement */}
+      <BigTitle title={'Environement'} />
+
+
+
+
+      {/* Modal ajout ou modification de la photos */}
       <Modal
         titleModal="Ajouter ou changer votre photo"
         isOpen={isNewPhotoModalOpen}
