@@ -11,7 +11,7 @@ import {
 import Ticket from "../../../components/shared/ticket/Ticket";
 import { BackButton } from "../../../components/shared/BackButton";
 import { getGarbageTypes } from "../../../features/garbageType/garbageTypeSlice";
-import { AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 function PrivateVoluntaryDropPoints() {
@@ -26,7 +26,7 @@ function PrivateVoluntaryDropPoints() {
   const [newVoluntaryDropPointData, setNewVoluntaryDropPointData] = useState({
     organisme: "",
     adresse: "",
-    garbageTypes: "",
+    garbageTypes: [],
     email: "",
     telephone: "",
   });
@@ -50,13 +50,25 @@ function PrivateVoluntaryDropPoints() {
   };
 
   const handleNewVoluntaryDropPointChange = (e) => {
-    const { name, value } = e.target;
-    setNewVoluntaryDropPointData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { name, value, options } = e.target;
+    
+    if (name === "garbageTypes") {
+      const selectedValues = Array.from(options)
+        .filter(option => option.selected)
+        .map(option => option.value);
+  
+      setNewVoluntaryDropPointData((prevData) => ({
+        ...prevData,
+        [name]: selectedValues,
+      }));
+    } else {
+      setNewVoluntaryDropPointData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
-
+  
   const handleNewVoluntaryDropPointSubmit = (e) => {
     e.preventDefault();
     dispatch(createVoluntaryDropPoint(newVoluntaryDropPointData))
@@ -76,8 +88,7 @@ function PrivateVoluntaryDropPoints() {
     closeNewVoluntaryDropPointModal();
   };
 
-  const handleDelete = async (id, event) => {
-    event.stopPropagation();
+  const handleDelete = async (id) => {
     if (
       window.confirm(
         "Êtes-vous sûr de vouloir supprimer ce point de dépôt volontaire ?"
@@ -96,7 +107,6 @@ function PrivateVoluntaryDropPoints() {
       }
     }
   };
-
   if (isLoading || !voluntaryDropPoints.data || !garbageTypes.data) {
     return <Spinner />;
   }
@@ -120,28 +130,25 @@ function PrivateVoluntaryDropPoints() {
         <div>adresse</div>
         <div>Ville</div>
         <div>Déchets</div>
-        <div>Supprimer</div>
+        <div>Actions</div>
       </div>
 
       {voluntaryDropPoints.data.map((dropPoint) => (
 
-        <Link  key={dropPoint.id} to={`/private/point-apport-volontaire/${dropPoint.id}`}>
+    
         <Ticket>
           <div>{dropPoint.organisme}</div>
           <div>{dropPoint.location.street}</div>
           <div>{dropPoint.location.city}</div>
-          {dropPoint.garbageTypes.map((garbageType, index) => (
-            <div key={index}>{garbageType.name}</div>
-            ))}
-
-          <button
-            onClick={(event) => handleDelete(dropPoint.id, event)}
-            style={{ background: "none", border: "none", color: "red" }}
-            >
-            <AiOutlineDelete size={20} />
-          </button>
-        </Ticket>
+          <div>{dropPoint.garbageTypes.length}</div>
+          <div>
+            <Link to={`/private/point-apport-volontaire/${dropPoint.id}`}>
+              <AiOutlineEye size={20} style={{ color: 'green', marginRight: '20px' }} />
             </Link>
+            <AiOutlineDelete size={20} style={{ color: 'red' }} onClick={() => handleDelete(dropPoint.id)} />
+          </div>
+        </Ticket>
+          
       ))}
 
       <Modal
@@ -170,21 +177,18 @@ function PrivateVoluntaryDropPoints() {
               value={newVoluntaryDropPointData.adresse}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="garbageTypes">Type de déchet</label>
-            <select
-              name="garbageTypes"
-              onChange={handleNewVoluntaryDropPointChange}
-              value={newVoluntaryDropPointData.garbageTypes}
-            >
-              <option value="">Sélectionner</option>
-              {garbageTypes.data.map((garbageType) => (
-                <option value={garbageType.id} key={garbageType.id}>
-                  {garbageType.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <select
+  name="garbageTypes"
+  onChange={handleNewVoluntaryDropPointChange}
+  value={newVoluntaryDropPointData.garbageTypes}
+  multiple // Add this attribute to enable multiple selection
+>
+  {garbageTypes.data.map((garbageType) => (
+    <option value={garbageType.id} key={garbageType.id}>
+      {garbageType.name}
+    </option>
+  ))}
+</select>
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
