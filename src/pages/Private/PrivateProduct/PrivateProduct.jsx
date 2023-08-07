@@ -23,6 +23,7 @@ import ProductScores from '../../../components/Product/ProductScores/ProductScor
 import ProductNutritionFacts from '../../../components/Product/ProductNutritionFacts/ProductNutritionFacts'
 import BigTitle from '../../../components/shared/BigTitle/BigTitle'
 import ProductEnvironement from '../../../components/Product/ProductEnvironement/ProductEnvironement'
+import ProductPriceRecords from '../../../components/Product/ProductPriceRecords/ProductPriceRecords'
 
 function PrivateProductDetail() {
   const { product, isLoading, isError, message } = useSelector(
@@ -104,17 +105,17 @@ function PrivateProductDetail() {
       <ProductAdditives product={product.data} />
       <ProductAllergens product={product.data} />
       <ProductNutritionFacts product={product.data} />
+      
+      <BigTitle title={'Environement'} />
+      <ProductEnvironement product={product.data} />
       {/* Section Prix */}
       <BigTitle title={'Prix'} />
 
       <AddPriceRecord product={product.data} />
 
       <ProductAveragePrice product={product.data} />
+      <ProductPriceRecords product={product.data}/>
       {/* Section environement */}
-      <BigTitle title={'Environement'} />
-
-<ProductEnvironement product={product.data}/>
-
 
 
       {/* Modal ajout ou modification de la photos */}

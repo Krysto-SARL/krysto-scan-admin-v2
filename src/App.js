@@ -35,6 +35,7 @@ import PrivateAdditive from './pages/Private/PrivateAdditive/PrivateAdditive.jsx
 import PrivateMarques from './pages/Private/PrivateMarques/PrivateMarques.jsx'
 import PrivateMarque from './pages/Private/PrivateMarque/PrivateMarque.jsx'
 import PrivateProductFamilies from './pages/Private/PrivateProductFamillies/PrivateProductFamillies.jsx'
+import PrivateGarbageType from './pages/Private/PrivateGarbageType/PrivateGarbageType.jsx'
 
 function App() {
   return (
@@ -91,6 +92,10 @@ function App() {
               <Route
                 path="/private/types-de-dechets"
                 element={<PrivateGarbagesTypes />}
+              />
+              <Route
+                path="/private/type-de-dechet/:id"
+                element={<PrivateGarbageType />}
               />
               <Route path="/private/scores" element={<PrivateScores />} />
               <Route path="/private/messages" element={<PrivateMessages />} />

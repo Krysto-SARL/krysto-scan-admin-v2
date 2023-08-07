@@ -1,0 +1,12 @@
+.plasticTypeProduct-container , .garbageTypeProduct-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem 0;
+    div{
+        background-color: #fff;
+        color: black;
+        padding: 2rem;
+        border-radius: 1rem;
+    }
+}
+
